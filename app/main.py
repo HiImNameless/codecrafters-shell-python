@@ -19,7 +19,7 @@ def error(command):
     print(f"{command}: command not found")
 
 def echo(command):
-    print
+    print(f"{command[5:]}")  # Print everything after "echo "
 
 if __name__ == "__main__":
     main()
