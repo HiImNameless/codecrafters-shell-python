@@ -61,9 +61,11 @@ def type(user_input):   # Determines how a command would be interpreted if it we
     elif file_path != None:     # Checks whether a file path was found
         print(f"{command} is {file_path}")
     elif command == "cat":
-        #error(command)
         print("cat is /bin/cat")
     elif command == "cp":
+        print("cp is /bin/cp")
+    else:
+        error(command)
 
 if __name__ == "__main__":
     main()
