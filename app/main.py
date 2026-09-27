@@ -64,6 +64,8 @@ def type(user_input):   # Determines how a command would be interpreted if it we
         print("cat is /bin/cat")
     elif command == "cp":
         print("cp is /bin/cp")
+    elif command == "mkdir":
+            print("mkdir is /bin/mkdir")
     else:
         error(command)
 
