@@ -21,7 +21,7 @@ def main():
         
 
 def error(command):
-    print(f"{command}: command not found")
+    print(f"{command}: not found")
 
 def echo(command):
     print(f"{command[5:]}")  # Print everything after "echo "
