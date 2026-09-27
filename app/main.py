@@ -27,7 +27,7 @@ def error(command):
 def echo(command):
     print(f"{command[5:]}")  # Print everything after "echo "
 
-def path_lookup(file_name):     # Searches through the PATH directories for the first .exe file with execute permissions
+def path_env_lookup(file_name):     # Searches through the PATH directories for the first .exe file with execute permissions
     path_env = os.environ.get("PATH", "")   # Stores the PATH directory
     directories = path_env.split(os.pathsep)    # 
 
@@ -52,7 +52,7 @@ def type(user_input):   # Determines how a command would be interpreted if it we
     built_in_commands = ["echo", "exit", "type"]    # List of commands categorized as built-ins
 
     command = user_input.split()[1]      # Stores the second word in the user's input
-    file_path = path_lookup(command)
+    file_path = path_env_lookup(command)
 
     #file_path = shutil.which(command)   # Search PATH for a matching .exe and save the filepath
     
