@@ -14,7 +14,7 @@ def main():
             case _ if command.startswith("echo"):
                 echo(command)
             case "type":
-                type(command, user_input)
+                type(user_input)
             case _:
                 error(command)
 
@@ -36,7 +36,7 @@ def type(user_input):
 
     #If the argument exists inside a list it prints the type otherwise it throws an error
     if argument in built_in_commands:
-        print(f"<{argument}> is a shell builtin")
+        print(f"{argument} is a shell builtin")
     else:
         error(argument)
 
