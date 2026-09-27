@@ -60,12 +60,6 @@ def type(user_input):   # Determines how a command would be interpreted if it we
         print(f"{command} is a shell builtin")  
     elif file_path != None:     # Checks whether a file path was found
         print(f"{command} is {file_path}")
-    elif command == "cat":
-        print("cat is /bin/cat")
-    elif command == "cp":
-        print("cp is /bin/cp")
-    elif command == "mkdir":
-            print("mkdir is /bin/mkdir")
     else:
         error(command)
 
