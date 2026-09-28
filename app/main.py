@@ -1,6 +1,6 @@
 import sys
-import shutil
 import os
+import platform
 
 def main():
     while True:
@@ -30,18 +30,27 @@ def echo(command):
 def path_env_lookup(file_name):     # Searches through the PATH directories for the first .exe file with execute permissions
     path_env = os.environ.get("PATH", "")   # Stores the PATH directory
     directories = path_env.split(os.pathsep)    # 
+    user_platform = platform.system()
 
     for directory in directories:
         if not directory or not os.path.isdir(directory):   # Skips invalid directories
             continue
 
         try:
-            for filename in os.listdir(directory):      # Looks through every file inside the current directory and looks for a .exe file name that matches
-                if filename.lower() == f"{file_name}.exe":
-                    full_path = os.path.join(directory, filename)
+            if user_platform == "Windows":
+                for filename in os.listdir(directory):      # Looks through every file inside the current directory and looks for a .exe file name that matches
+                    if filename.lower() == f"{file_name}.exe":
+                        full_path = os.path.join(directory, filename)
 
-                    if os.path.isfile(full_path) and os.access(full_path, os.X_OK): # Checks whether the .exe has execute permissions
-                        return full_path
+                        if os.path.isfile(full_path) and os.access(full_path, os.X_OK): # Checks whether the .exe has execute permissions
+                            return full_path
+            elif user_platform == "Linux":
+                for filename in os.listdir(directory):      # Looks through every file inside the current directory and looks for a .exe file name that matches
+                    if filename.lower() == f"{file_name}":
+                        full_path = os.path.join(directory, filename)
+
+                        if os.path.isfile(full_path) and os.access(full_path, os.X_OK): # Checks whether the .exe has execute permissions
+                            return full_path
         except PermissionError:
             continue
     return None
