@@ -24,7 +24,6 @@ def main():
                     file_path = path_exec_lookup(command)
 
                     run(user_input, file_path)
-                    print("External Program")
                 else:
                     error(1, command)
 
@@ -93,8 +92,8 @@ def type_return(command):   # Determines the command's type and returns the valu
 def run(user_input, executable_path):
     arguments = user_input.split()[1:]
 
-    process = subprocess.Popen([executable_path] + arguments)
-    sys.exit
+    process = subprocess.run([executable_path] + arguments)
+    sys.exit(0)
 
 
 if __name__ == "__main__":
