@@ -27,8 +27,6 @@ def main():
                 else:
                     error(1, command)
 
-        
-
 def error(code, command):
     match code:
         case 1:
@@ -89,7 +87,7 @@ def type_return(command):   # Determines the command's type and returns the valu
     else:
         return None
 
-def split_path_tail(path):
+def split_path_tail(path):  # Splits the a file path into a list at each / or \ depending on os and returns the final word in the list
     user_platform = platform.system()
 
     if user_platform == "Windows":
