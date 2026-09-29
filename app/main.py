@@ -94,6 +94,7 @@ def run(user_input, executable_path):
     arguments = user_input.split()[1:]
 
     process = subprocess.Popen([executable_path] + arguments)
+    sys.exit
 
 
 if __name__ == "__main__":
