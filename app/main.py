@@ -5,7 +5,8 @@ import subprocess
 
 def main():
     while True:
-        sys.stdout.write("$ ")
+        cwd = os.getcwd()
+        sys.stdout.write(f"{cwd}> ")
 
         user_input = input()
         command = user_input.split()[0]
@@ -19,6 +20,8 @@ def main():
                 tested_command = user_input.split()[1]
 
                 type(tested_command)
+            case "pwd":
+                pwd()
             case _:
                 if type_return(command) == "external":
                     file_path = path_exec_lookup(command)
@@ -37,7 +40,7 @@ def echo(command):
 
 def path_exec_lookup(file_name):     # Searches through the PATH directories for the first .exe file with execute permissions
     path_env = os.environ.get("PATH", "")   # Stores the PATH directory
-    directories = path_env.split(os.pathsep)    # 
+    directories = path_env.split(os.pathsep) 
     user_platform = platform.system()   # Stores the user's operating system
 
     for directory in directories:
@@ -104,6 +107,10 @@ def run(user_input, executable_path):
 
     process = subprocess.run([split_path_tail(executable_path)] + arguments, executable = executable_path)
 
+def pwd():
+    cwd = os.getcwd()
+    print(cwd)
+    return cwd
 
 if __name__ == "__main__":
     main()
