@@ -23,7 +23,7 @@ def main():
             case "pwd":
                 pwd()
             case _:
-                if type_return(command) == "external":
+                if type(command, "return") == "external":
                     file_path = path_exec_lookup(command)
 
                     run(user_input, file_path)
@@ -67,28 +67,25 @@ def path_exec_lookup(file_name):     # Searches through the PATH directories for
             continue
     return None
 
-def type(command):   # Determines and tells the user how a command would be interpreted if it were used
+def type(command, mode):   # Determines and tells the user how a command would be interpreted if it were used
 
-    built_in_commands = ["echo", "exit", "type"]    # List of commands categorized as built-ins
+    built_in_commands = ["echo", "exit", "type", "pwd"]    # List of commands categorized as built-ins
     file_path = path_exec_lookup(command)   # Stores the file path to the executable file
 
-    if command in built_in_commands:    # Checks whether the command is a builtin
-        print(f"{command} is a shell builtin")
-    elif file_path != None:     # Checks whether a file path was found
-        print(f"{command} is {file_path}")
-    else:
-        error(1, command) 
-
-def type_return(command):   # Determines the command's type and returns the value
-    built_in_commands = ["echo", "exit", "type"]    # List of commands categorized as built-ins
-    file_path = path_exec_lookup(command)   # Stores the file path to the executable file
-        
-    if command in built_in_commands:    # Checks whether the command is a builtin
-        return "builtin"
-    elif file_path != None:     # Checks whether a file path was found
-        return "external"
-    else:
-        return None
+    if mode == None:
+        if command in built_in_commands:    # Checks whether the command is a builtin
+            print(f"{command} is a shell builtin")
+        elif file_path != None:     # Checks whether a file path was found
+            print(f"{command} is {file_path}")
+        else:
+            error(1, command) 
+    elif mode.lower() == "return":
+        if command in built_in_commands:    # Checks whether the command is a builtin
+            return "builtin"
+        elif file_path != None:     # Checks whether a file path was found
+            return "external"
+        else:
+            return None
 
 def split_path_tail(path):  # Splits the a file path into a list at each / or \ depending on os and returns the final word in the list
     user_platform = platform.system()
