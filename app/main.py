@@ -67,7 +67,7 @@ def path_exec_lookup(file_name):     # Searches through the PATH directories for
             continue
     return None
 
-def type(command, mode):   # Determines and tells the user how a command would be interpreted if it were used
+def type(command, mode = None):   # Determines and tells the user how a command would be interpreted if it were used
 
     built_in_commands = ["echo", "exit", "type", "pwd"]    # List of commands categorized as built-ins
     file_path = path_exec_lookup(command)   # Stores the file path to the executable file
