@@ -89,16 +89,22 @@ def type_return(command):   # Determines the command's type and returns the valu
     else:
         return None
 
-def split_path_end(path):
-    list = path.split("/")
-    path_end = list[len(list) - 1]
+def split_path_tail(path):
+    user_platform = platform.system()
 
-    return path_end
+    if user_platform == "Windows":
+        list = path.split("\\")
+    else:
+        list = path.split("/")
+
+    path_tail = list[len(list) - 1]
+
+    return path_tail
 
 def run(user_input, executable_path):
     arguments = user_input.split()[1:]
 
-    process = subprocess.run([executable_path] + arguments, executable = split_path_end(executable_path))
+    process = subprocess.run([split_path_tail(executable_path)] + arguments, executable = executable_path)
 
 
 if __name__ == "__main__":
