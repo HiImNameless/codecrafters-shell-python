@@ -23,7 +23,7 @@ def main():
                 if type_return(command) == "external":
                     file_path = path_exec_lookup(command)
 
-                    run(file_path)
+                    run(user_input, file_path)
                     print("External Program")
                 else:
                     error(1, command)
@@ -46,7 +46,7 @@ def path_exec_lookup(file_name):     # Searches through the PATH directories for
     for directory in directories:
         if not directory or not os.path.isdir(directory):   # Skips invalid directories
             continue
-
+        
         try:
             if user_platform == "Windows":
                 for filename in os.listdir(directory):      # Looks through every file inside the current directory and looks for a .exe file name that matches
@@ -90,8 +90,11 @@ def type_return(command):   # Determines the command's type and returns the valu
     else:
         return None
 
-def run(executable_path):
-    process = subprocess.Popen(executable_path)
+def run(user_input, executable_path):
+    arguments = user_input.split()[1:]
+
+    process = subprocess.Popen([executable_path] + arguments)
+
 
 if __name__ == "__main__":
     main()
