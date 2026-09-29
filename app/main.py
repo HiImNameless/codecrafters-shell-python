@@ -89,10 +89,16 @@ def type_return(command):   # Determines the command's type and returns the valu
     else:
         return None
 
+def split_path_end(path):
+    list = path.split("/")
+    path_end = list[len(list) - 1]
+
+    return path_end
+
 def run(user_input, executable_path):
     arguments = user_input.split()[1:]
 
-    process = subprocess.run([executable_path] + arguments)
+    process = subprocess.run([executable_path] + arguments, executable = split_path_end(executable_path))
 
 
 if __name__ == "__main__":
