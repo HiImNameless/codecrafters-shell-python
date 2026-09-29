@@ -6,7 +6,7 @@ import subprocess
 def main():
     while True:
         cwd = os.getcwd()
-        sys.stdout.write(f"{cwd}> ")
+        sys.stdout.write("$ ")
 
         user_input = input()
         command = user_input.split()[0]
