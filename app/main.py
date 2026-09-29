@@ -90,6 +90,7 @@ def type_return(command):   # Determines the command's type and returns the valu
         return None
 
 def run(user_input, executable_path):
+    print(executable_path)
     arguments = user_input.split()[1:]
 
     process = subprocess.run([executable_path] + arguments)
