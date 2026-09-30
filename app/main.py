@@ -122,8 +122,6 @@ def cd(user_input):
     current_user = getpass.getuser()
     directory_path = user_input.split()[1]
 
-    print(current_user)
-
     if os.path.isdir(directory_path):
         os.chdir(directory_path)
     elif directory_path == "~":
