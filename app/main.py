@@ -2,6 +2,7 @@ import sys
 import os
 import platform
 import subprocess
+import getpass
 
 def main():
     while True:
@@ -9,7 +10,10 @@ def main():
         sys.stdout.write("$ ")
 
         user_input = input()
-        command = user_input.split()[0]
+        try:
+            command = user_input.split()[0]
+        except:
+            continue
 
         match command:
             case "exit":
@@ -73,7 +77,7 @@ def path_exec_lookup(file_name):     # Searches through the PATH directories for
 
 def type(command, mode = None):   # Determines and tells the user how a command would be interpreted if it were used
 
-    built_in_commands = ["echo", "exit", "type", "pwd"]    # List of commands categorized as built-ins
+    built_in_commands = ["echo", "exit", "type", "pwd", "cd"]    # List of commands categorized as built-ins
     file_path = path_exec_lookup(command)   # Stores the file path to the executable file
 
     if mode == None:
@@ -114,10 +118,19 @@ def pwd():
     return cwd
 
 def cd(user_input):
+    user_platform = platform.system()
+    current_user = getpass.getuser()
     directory_path = user_input.split()[1]
+
+    print(current_user)
 
     if os.path.isdir(directory_path):
         os.chdir(directory_path)
+    elif directory_path == "~":
+        if user_platform == "Linux":
+            os.chdir(f"/home/{current_user}")
+        elif user_platform == "Windows":
+            os.chdir(f"C:\\Users\\{current_user}")
     else:
         error(2, directory_path)
     
