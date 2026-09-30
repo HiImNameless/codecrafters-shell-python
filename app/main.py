@@ -22,6 +22,8 @@ def main():
                 type(tested_command)
             case "pwd":
                 pwd()
+            case "cd":
+                cd(user_input)
             case _:
                 if type(command, "return") == "external":
                     file_path = path_exec_lookup(command)
@@ -34,6 +36,8 @@ def error(code, command):
     match code:
         case 1:
             print(f"{command}: not found")
+        case 2:
+            print(f"cd: {command}: No such file or directory")
 
 def echo(command):
     print(f"{command[5:]}")  # Print everything after "echo "
@@ -109,5 +113,13 @@ def pwd():
     print(cwd)
     return cwd
 
+def cd(user_input):
+    directory_path = user_input.split()[1]
+
+    if os.path.isdir(directory_path):
+        os.chdir(directory_path)
+    else:
+        error(2, directory_path)
+    
 if __name__ == "__main__":
     main()
