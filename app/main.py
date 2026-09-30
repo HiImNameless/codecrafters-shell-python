@@ -2,7 +2,7 @@ import sys
 import os
 import platform
 import subprocess
-import getpass
+from pathlib import Path
 
 def main():
     while True:
@@ -119,19 +119,14 @@ def pwd():
 
 def cd(user_input):
     user_platform = platform.system()
-    current_user = getpass.getuser()
     directory_path = user_input.split()[1]
+    home_dir = Path.home()
 
     if os.path.isdir(directory_path):
         os.chdir(directory_path)
     elif directory_path == "~":
         if user_platform == "Linux":
-            if current_user == "root":
-                os.chdir(f"/root")
-            else:
-                os.chdir(f"/home/{current_user}")
-        elif user_platform == "Windows":
-            os.chdir(f"C:\\Users\\{current_user}")
+            os.chdir(home_dir)
     else:
         error(2, directory_path)
     
