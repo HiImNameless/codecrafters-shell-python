@@ -126,7 +126,10 @@ def cd(user_input):
         os.chdir(directory_path)
     elif directory_path == "~":
         if user_platform == "Linux":
-            os.chdir(f"/home/{current_user}")
+            if current_user == "root":
+                os.chdir(f"/root")
+            else:
+                os.chdir(f"/home/{current_user}")
         elif user_platform == "Windows":
             os.chdir(f"C:\\Users\\{current_user}")
     else:
